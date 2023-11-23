@@ -21,7 +21,6 @@ const Card = ({ image, title, ingredients, est_time, instructions, id }) => {
         </div>
         {instructions}
       </div>
-      <button>Ok</button>
     </div>
   );
 };
