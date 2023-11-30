@@ -1,12 +1,11 @@
-import React from 'react';
-import Card from '../components/Card';
-import Input from '../components/Input';
+import Card from "../components/Card";
+import Input from "../components/Input";
 
 function Recipes({ searchHandler, recipes, search }) {
   return (
     <>
       <div className="container">
-      <Input />
+        <Input />
         <input type="text" placeholder="Search" onChange={searchHandler} />
         <div className="cards">
           {recipes
