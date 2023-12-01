@@ -1,4 +1,4 @@
-function fetchData(ingredients) {
+function fetchRecipeByIngr(ingredients) {
   fetch(
     `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=bea3c85afe2346a6810cb7168710f978`
   )
@@ -7,4 +7,4 @@ function fetchData(ingredients) {
       console.log(data);
     });
 }
-fetchData();
+fetchRecipeByIngr();
