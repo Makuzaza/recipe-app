@@ -1,0 +1,32 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  padding: 10px;
+  font-weight: 700;
+}
+.image img {
+  width: 100%;
+}
+.inst {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.ing {
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-style: italic;
+  color: #444;
+}
+.time {
+  flex: 0 0 auto;
+}
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
