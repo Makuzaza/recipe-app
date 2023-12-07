@@ -5,8 +5,8 @@ function Recipes({ searchHandler, recipes, search }) {
   return (
     <>
       <div className="container">
-        <Input />
-        <input type="text" placeholder="Search" onChange={searchHandler} />
+        {/*  <Input />
+        <input type="text" placeholder="Search" onChange={searchHandler} /> */}
         <div className="cards">
           {recipes
             .filter((item) =>

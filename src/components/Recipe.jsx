@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import recipes from "../fake_recipes.json";
+import styles from "./Recipe.module.css";
 
 const Recipe = () => {
   const { id } = useParams();
@@ -8,29 +9,31 @@ const Recipe = () => {
   const { title, image, ingredients, est_time, instructions } = recipe;
   const navigate = useNavigate();
   return (
-    <div className="card">
-      <div className="title"> {title}</div>
-      <div>
-        <img className="image" src={image} alt={title} />
+    <div className={styles.cardContainer}>
+      <div className={styles.title}> {title}</div>
+      <div className={styles.image}>
+        <img src={image} alt={title} />
       </div>
-      <div className="inst">
-        <div className="ing">
+      <div className={styles.inst}>
+        <div className={styles.ing}>
           <div>
-            Ingredient:
+            <b>Ingredient:</b>
             {ingredients.map((item) => {
               return (
-                <p className="item" key={id}>
-                  {`${item}, `}
-                </p>
+                <span className="item" key={id}>
+                  {` ${item}, `}
+                </span>
               );
             })}
           </div>
-          <div>Time: {est_time} min</div>
+          <div className={styles.time}>{est_time} min</div>
         </div>
         {instructions}
       </div>
-      <button onClick={() => navigate(-1)}>Back</button>
-      <button onClick={() => navigate("/")}>Home</button>
+      <div className={styles.buttons}>
+        <button onClick={() => navigate(-1)}>Back</button>
+        <button onClick={() => navigate("/")}>Home</button>
+      </div>
     </div>
   );
 };

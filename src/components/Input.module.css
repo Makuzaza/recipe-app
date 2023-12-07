@@ -1,0 +1,9 @@
+.inputContainer {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 1rem;
+  align-items: center;
+}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import recipes from "./fake_recipes.json";
 import Input from "./components/Input";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -7,6 +6,7 @@ import Recipes from "./routes/recipes";
 import Recipe from "./components/Recipe";
 import Root from "./routes/root";
 import ErrorPage from "./routes/error";
+import "./index.css";
 
 function App() {
   const [search, setSearch] = useState("");

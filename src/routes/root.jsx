@@ -3,10 +3,12 @@ import Header from "../components/Header";
 
 function Root() {
   return (
-    <>
-      <Header />
-      <Outlet />
-    </>
+    <div className="container">
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </div>
   );
 }
 
