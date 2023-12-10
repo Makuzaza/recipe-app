@@ -28,7 +28,7 @@ const Recipe = () => {
           </div>
           <div className={styles.time}>{est_time} min</div>
         </div>
-        {instructions}
+        <div className={styles.instructions}>{instructions}</div>
       </div>
       <div className={styles.buttons}>
         <button onClick={() => navigate(-1)}>Back</button>
