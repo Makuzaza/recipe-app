@@ -90,7 +90,12 @@ function Input() {
 
   return (
     <div className={styles.inputContainer}>
-      <input type="text" placeholder="Type here the products" />
+      <div className={styles.inputButton}>
+        <input type="text" placeholder="Enter your products..." />
+        <button>
+          <span>➕</span> Add
+        </button>
+      </div>
 
       {categories.map((category, index) => (
         <div key={index} className={styles.dropdown}>

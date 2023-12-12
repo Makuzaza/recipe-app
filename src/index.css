@@ -34,7 +34,9 @@ input {
 }
 input {
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1px solid #c7c6c6;
+  font-size: 13px;
 }
 button {
   padding: 5px 15px;
