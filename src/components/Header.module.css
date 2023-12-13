@@ -1,8 +1,6 @@
 .headerContainer {
-  padding: 5px;
-  width: 100%;
   background-color: rgb(225, 226, 216);
-  padding: px;
   border-radius: 10px 10px 0 0;
   border: none;
+  padding: 0 0 0 10px;
 }

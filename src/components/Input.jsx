@@ -10,13 +10,27 @@ import garlicImage from "../components/images/garlic.png";
 import onionImage from "../components/images/onion.png";
 import pumpkinImage from "../components/images/pumpkin.png";
 import radishImage from "../components/images/radish.png";
-import beefImage from "../components/images/beef.png";
-import chickenImage from "../components/images/beef.png";
-import fishImage from "../components/images/beef.png";
-import porkImage from "../components/images/beef.png";
-import salmonImage from "../components/images/beef.png";
+import beefImage from "../components/images/cow.png";
+import chickenImage from "../components/images/chicken.png";
+import fishImage from "../components/images/fish.png";
+import porkImage from "../components/images/pork.png";
+import salmonImage from "../components/images/salmon.png";
+import sausageImage from "../components/images/sausages.png";
 import appleImage from "../components/images/apple.png";
+import bananaImage from "../components/images/banana.png";
+import orangeImage from "../components/images/orange.png";
+import grapesImage from "../components/images/grape.png";
+import strawberryImage from "../components/images/strawberry.png";
+import pineappleImage from "../components/images/pineapple.png";
+import lemonImage from "../components/images/lemon.png";
 import milkImage from "../components/images/milk.png";
+import cheeseImage from "../components/images/cheese.png";
+import yogurtImage from "../components/images/yogurt.png";
+import butterImage from "../components/images/butter.png";
+import eggsImage from "../components/images/egg.png";
+import potatoImage from "../components/images/potato.png";
+import riceImage from "../components/images/rice.png";
+import pastaImage from "../components/images/pasta.png";
 
 const categories = [
   {
@@ -41,27 +55,37 @@ const categories = [
       { name: "Fish", image: fishImage },
       { name: "Pork", image: porkImage },
       { name: "Salmon", image: salmonImage },
+      { name: "Sausage", image: sausageImage },
     ],
   },
   {
     name: "Fruits",
     items: [
       { name: "Apple", image: appleImage },
-      { name: "Banana", image: appleImage },
-      { name: "Orange", image: appleImage },
-      { name: "Grapes", image: appleImage },
-      { name: "Strawberry", image: appleImage },
-      { name: "Pineapple", image: appleImage },
+      { name: "Banana", image: bananaImage },
+      { name: "Orange", image: orangeImage },
+      { name: "Grapes", image: grapesImage },
+      { name: "Strawberry", image: strawberryImage },
+      { name: "Pineapple", image: pineappleImage },
+      { name: "Lemon", image: lemonImage },
     ],
   },
   {
     name: "Dairy Products",
     items: [
       { name: "Milk", image: milkImage },
-      { name: "Cheese", image: milkImage },
-      { name: "Yogurt", image: milkImage },
-      { name: "Butter", image: milkImage },
-      { name: "Eggs", image: milkImage },
+      { name: "Cheese", image: cheeseImage },
+      { name: "Yogurt", image: yogurtImage },
+      { name: "Butter", image: butterImage },
+      { name: "Eggs", image: eggsImage },
+    ],
+  },
+  {
+    name: "Basics",
+    items: [
+      { name: "Potato", image: potatoImage },
+      { name: "Rice", image: riceImage },
+      { name: "Pasta", image: pastaImage },
     ],
   },
 ];
