@@ -112,6 +112,12 @@ function Input() {
     }
   };
 
+  const handleClose = (item) => {
+    setSelectedItems((prevSelected) =>
+      prevSelected.filter((selectedItem) => selectedItem !== item)
+    );
+  };
+
   return (
     <div className={styles.inputContainer}>
       <div className={styles.inputButton}>
@@ -147,7 +153,10 @@ function Input() {
         <div className={styles.selectedItem}>You chose:</div>
         <div className={styles.selectedItem}>
           {selectedItems.map((itemName, index) => (
-            <div key={index}>{itemName}</div>
+            <div key={index}>
+             <button onClick={() => handleClose(itemName)}> {itemName}
+              ×</button>
+            </div>
           ))}
         </div>
       </div>
