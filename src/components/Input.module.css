@@ -48,12 +48,8 @@ img {
   justify-content: center;
   gap: 1rem;
 }
-.inputButton {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-.inputButton input {
+
+.inputWithButton input {
   width: 200px;
 }
 .inputButton button {
@@ -65,4 +61,25 @@ img {
   justify-content: center;
   align-items: center;
   gap: 5px;
+}
+.suggestion {
+  border-left: 1px solid #444;
+  border-bottom: 1px solid #444;
+  border-right: 1px solid #444;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.suggestion:hover {
+  background-color: #e3e2e2;
+  cursor: pointer;
+}
+
+.inputWithButton {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.inputWithButton button {
+  width: 90px;
+  height: 30px;
 }
