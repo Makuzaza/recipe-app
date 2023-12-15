@@ -93,6 +93,27 @@ const categories = [
 function Input() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [input, setInput] = useState("");
+  const [suggestions, setSuggestoins] = useState([]);
+
+  const getSuggestions = async (input) => {
+    await fetch(
+      `https://api.spoonacular.com/food/ingredients/autocomplete?query=${input}&number=5&apiKey=bea3c85afe2346a6810cb7168710f978`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setSuggestoins(data);
+      });
+  };
+
+  const suggestionHandler = (text) => {
+    console.log("text", text);
+
+    setInput(text);
+    console.log("afterClick", input);
+
+    setSuggestoins([]);
+  };
 
   const handleCategoryClick = (category) => {
     if (selectedCategory === category) {
@@ -120,8 +141,29 @@ function Input() {
 
   return (
     <div className={styles.inputContainer}>
-      <div className={styles.inputButton}>
-        <input type="text" placeholder="Enter your products..." />
+      <div className={styles.inputWithButton}>
+        <div>
+          <input
+            placeholder="Type here ..."
+            type="text"
+            onChange={(e) => {
+              setInput(e.target.value);
+              getSuggestions(e.target.value);
+            }}
+            value={input}
+          />
+          {suggestions &&
+            suggestions.map((suggestion, i) => (
+              <div
+                key={i}
+                className={styles.suggestion}
+                onClick={() => suggestionHandler(suggestion.name)}
+              >
+                {suggestion.name}
+              </div>
+            ))}
+        </div>
+
         <button>
           <span>➕</span> Add
         </button>
@@ -154,8 +196,10 @@ function Input() {
         <div className={styles.selectedItem}>
           {selectedItems.map((itemName, index) => (
             <div key={index}>
-             <button onClick={() => handleClose(itemName)}> {itemName}
-              ×</button>
+              <button onClick={() => handleClose(itemName)}>
+                {" "}
+                {itemName}×
+              </button>
             </div>
           ))}
         </div>
