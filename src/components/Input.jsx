@@ -95,6 +95,7 @@ function Input() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [input, setInput] = useState("");
   const [suggestions, setSuggestoins] = useState([]);
+  const [typing, setTyping] = useState(false);
 
   const getSuggestions = async (input) => {
     await fetch(
@@ -149,6 +150,7 @@ function Input() {
             onChange={(e) => {
               setInput(e.target.value);
               getSuggestions(e.target.value);
+              setTyping(true);
             }}
             value={input}
           />
@@ -157,7 +159,10 @@ function Input() {
               <div
                 key={i}
                 className={styles.suggestion}
-                onClick={() => suggestionHandler(suggestion.name)}
+                onClick={() => {
+                  suggestionHandler(suggestion.name);
+                  setTyping(false);
+                }}
               >
                 {suggestion.name}
               </div>
@@ -169,27 +174,28 @@ function Input() {
         </button>
       </div>
 
-      {categories.map((category, index) => (
-        <div key={index} className={styles.dropdown}>
-          <button onClick={() => handleCategoryClick(category.name)}>
-            {category.name}
-          </button>
-          {selectedCategory === category.name && (
-            <div className={styles.dropdownContent}>
-              {category.items.map((item, itemIndex) => (
-                <div
-                  key={itemIndex}
-                  onClick={() => handleItemClick(item.name)}
-                  className={styles.selected}
-                >
-                  <img src={item.image} />
-                  {item.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+      {!typing &&
+        categories.map((category, index) => (
+          <div key={index} className={styles.dropdown}>
+            <button onClick={() => handleCategoryClick(category.name)}>
+              {category.name}
+            </button>
+            {selectedCategory === category.name && (
+              <div className={styles.dropdownContent}>
+                {category.items.map((item, itemIndex) => (
+                  <div
+                    key={itemIndex}
+                    onClick={() => handleItemClick(item.name)}
+                    className={styles.selected}
+                  >
+                    <img src={item.image} />
+                    {item.name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
 
       <div className={styles.selectedItems}>
         <div className={styles.selectedItem}>You chose:</div>
