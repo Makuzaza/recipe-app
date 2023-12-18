@@ -41,7 +41,8 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  font-weight: bolder;
 }
 
 .selectedItems {
@@ -49,10 +50,14 @@ img {
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+  border: 1px solid #c7c6c6;
+  border-radius: 10px;
+  width: 90%;
+  padding: 5px 0;
 }
 
 .inputWithButton input {
-  width: 200px;
+  text-align: center;
 }
 .inputButton button {
   width: 70px;
@@ -84,4 +89,7 @@ img {
 .inputWithButton button {
   width: 90px;
   height: 30px;
+}
+.choosenItems {
+  background-color: rgb(255, 173, 20);
 }
