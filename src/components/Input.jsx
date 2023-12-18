@@ -36,56 +36,56 @@ const categories = [
   {
     name: "Vegetables",
     items: [
-      { name: "Cucumber", image: cucumberImage },
-      { name: "Carrot", image: carrotImage },
-      { name: "Tomato", image: tomatoImage },
-      { name: "Avocado", image: avokadoImage },
-      { name: "Cabbage", image: cabbageImage },
-      { name: "Garlic", image: garlicImage },
-      { name: "Onion", image: onionImage },
-      { name: "Pumpkin", image: pumpkinImage },
-      { name: "Radish", image: radishImage },
+      { name: "cucumber", image: cucumberImage },
+      { name: "carrot", image: carrotImage },
+      { name: "tomato", image: tomatoImage },
+      { name: "avocado", image: avokadoImage },
+      { name: "cabbage", image: cabbageImage },
+      { name: "garlic", image: garlicImage },
+      { name: "onion", image: onionImage },
+      { name: "pumpkin", image: pumpkinImage },
+      { name: "radish", image: radishImage },
     ],
   },
   {
     name: "Meat/fish",
     items: [
-      { name: "Beef", image: beefImage },
-      { name: "Chicken", image: chickenImage },
-      { name: "Fish", image: fishImage },
-      { name: "Pork", image: porkImage },
-      { name: "Salmon", image: salmonImage },
-      { name: "Sausage", image: sausageImage },
+      { name: "beef", image: beefImage },
+      { name: "chicken", image: chickenImage },
+      { name: "fish", image: fishImage },
+      { name: "pork", image: porkImage },
+      { name: "salmon", image: salmonImage },
+      { name: "sausage", image: sausageImage },
     ],
   },
   {
     name: "Fruits",
     items: [
-      { name: "Apple", image: appleImage },
-      { name: "Banana", image: bananaImage },
-      { name: "Orange", image: orangeImage },
-      { name: "Grapes", image: grapesImage },
-      { name: "Strawberry", image: strawberryImage },
-      { name: "Pineapple", image: pineappleImage },
-      { name: "Lemon", image: lemonImage },
+      { name: "apple", image: appleImage },
+      { name: "banana", image: bananaImage },
+      { name: "orange", image: orangeImage },
+      { name: "grapes", image: grapesImage },
+      { name: "strawberry", image: strawberryImage },
+      { name: "pineapple", image: pineappleImage },
+      { name: "lemon", image: lemonImage },
     ],
   },
   {
     name: "Dairy Products",
     items: [
-      { name: "Milk", image: milkImage },
-      { name: "Cheese", image: cheeseImage },
-      { name: "Yogurt", image: yogurtImage },
-      { name: "Butter", image: butterImage },
-      { name: "Eggs", image: eggsImage },
+      { name: "milk", image: milkImage },
+      { name: "cheese", image: cheeseImage },
+      { name: "yogurt", image: yogurtImage },
+      { name: "butter", image: butterImage },
+      { name: "eggs", image: eggsImage },
     ],
   },
   {
     name: "Basics",
     items: [
-      { name: "Potato", image: potatoImage },
-      { name: "Rice", image: riceImage },
-      { name: "Pasta", image: pastaImage },
+      { name: "potato", image: potatoImage },
+      { name: "rice", image: riceImage },
+      { name: "pasta", image: pastaImage },
     ],
   },
 ];
@@ -96,6 +96,8 @@ function Input() {
   const [input, setInput] = useState("");
   const [suggestions, setSuggestoins] = useState([]);
   const [typing, setTyping] = useState(false);
+
+  console.log(selectedItems);
 
   const getSuggestions = async (input) => {
     await fetch(
@@ -139,6 +141,15 @@ function Input() {
       prevSelected.filter((selectedItem) => selectedItem !== item)
     );
   };
+  function addItemsFromInput(item) {
+    if (selectedItems.includes(item)) {
+      setInput("");
+      return;
+    } else {
+      setSelectedItems((prevSelected) => [...prevSelected, item]);
+      setInput("");
+    }
+  }
 
   return (
     <div className={styles.inputContainer}>
@@ -162,16 +173,13 @@ function Input() {
                 onClick={() => {
                   suggestionHandler(suggestion.name);
                   setTyping(false);
+                  addItemsFromInput(suggestion.name);
                 }}
               >
                 {suggestion.name}
               </div>
             ))}
         </div>
-
-        <button>
-          <span>➕</span> Add
-        </button>
       </div>
 
       {!typing &&
@@ -198,13 +206,16 @@ function Input() {
         ))}
 
       <div className={styles.selectedItems}>
-        <div className={styles.selectedItem}>You chose:</div>
+        <div className={styles.selectedItem}>You have:</div>
         <div className={styles.selectedItem}>
           {selectedItems.map((itemName, index) => (
             <div key={index}>
-              <button onClick={() => handleClose(itemName)}>
+              <button
+                className={styles.choosenItems}
+                onClick={() => handleClose(itemName)}
+              >
                 {" "}
-                {itemName}×
+                {itemName} ⛌
               </button>
             </div>
           ))}
