@@ -90,14 +90,15 @@ const categories = [
   },
 ];
 
-function Input() {
+function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [input, setInput] = useState("");
   const [suggestions, setSuggestoins] = useState([]);
   const [typing, setTyping] = useState(false);
 
-  console.log(selectedItems);
+  console.log("selectedItem", selectedItems);
+  console.log("recipesArr", recipes);
 
   const getSuggestions = async (input) => {
     await fetch(
@@ -223,7 +224,7 @@ function Input() {
       </div>
 
       <Link to="/recipes">
-        <button>Submit</button>
+        <button onClick={() => fetchRecipeByIngr(selectedItems)}>Submit</button>
       </Link>
     </div>
   );

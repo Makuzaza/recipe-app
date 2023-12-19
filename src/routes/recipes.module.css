@@ -1,0 +1,17 @@
+.container {
+  padding: 0 10px 10px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 13px;
+  font-weight: 700;
+}
+.recipe_buttons {
+  margin: auto;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+.recipe_buttons button:hover {
+  cursor: pointer;
+}

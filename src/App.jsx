@@ -1,5 +1,4 @@
 import { useState } from "react";
-import recipes from "./fake_recipes.json";
 import Input from "./components/Input";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Recipes from "./routes/recipes";
@@ -10,6 +9,18 @@ import "./index.css";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [recipes, setRecipes] = useState([]);
+
+  const fetchRecipeByIngr = async (ingredients) => {
+    await fetch(
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=15&apiKey=bea3c85afe2346a6810cb7168710f978`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("fromAPI", data);
+        setRecipes(data);
+      });
+  };
 
   function searchHandler(e) {
     setSearch(e.target.value);
@@ -20,7 +31,16 @@ function App() {
       element: <Root />,
       errorElement: <ErrorPage />,
       children: [
-        { path: "/", element: <Input /> },
+        {
+          path: "/",
+          element: (
+            <Input
+              fetchRecipeByIngr={fetchRecipeByIngr}
+              recipes={recipes}
+              setRecipes={setRecipes}
+            />
+          ),
+        },
         {
           path: "/recipes",
           element: (
