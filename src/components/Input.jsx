@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./Input.module.css";
 import { useState } from "react";
-import { categories } from '../categoryList';
+import { categories } from "../categoryList";
 
 // managing selected category, selected items, user input, suggestions, and typing state.
-function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
+function Input({ fetchRecipeByIngr }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [input, setInput] = useState("");
@@ -12,7 +12,6 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
   const [typing, setTyping] = useState(false);
 
   console.log("selectedItem", selectedItems);
-  console.log("recipesArr", recipes);
 
   // asynchronous request to API to fetch ingredients based on the user's input
   const getSuggestions = async (input) => {
@@ -25,19 +24,16 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
       });
   };
 
- // handle user interactions
+  // handle user interactions
   const suggestionHandler = (text) => {
-    console.log("text", text);
-
     setInput(text);
-    console.log("afterClick", input);
-
     setSuggestoins([]);
   };
 
   // select - deselect category
   const handleCategoryClick = (category) => {
-    if (selectedCategory === category) { //clicked category is the one that is currently selected
+    if (selectedCategory === category) {
+      //clicked category is the one that is currently selected
       setSelectedCategory(null);
     } else {
       setSelectedCategory(category);
@@ -45,7 +41,8 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
   };
 
   const handleItemClick = (item) => {
-    if (selectedItems.includes(item)) { // item is already in the list
+    if (selectedItems.includes(item)) {
+      // item is already in the list
       setSelectedItems((prevSelected) =>
         prevSelected.filter((i) => i !== item)
       );
@@ -56,17 +53,21 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
 
   // remove item from the list
   const handleClose = (item) => {
-    setSelectedItems((prevSelected) => // create a new array 
-      prevSelected.filter((selectedItem) => selectedItem !== item)
+    setSelectedItems(
+      (
+        prevSelected // create a new array
+      ) => prevSelected.filter((selectedItem) => selectedItem !== item)
     );
   };
 
   // checks whether the item is already in the list
   function addItemsFromInput(item) {
-    if (selectedItems.includes(item)) { // checks if the selectedItems array already includes item
+    if (selectedItems.includes(item)) {
+      // checks if the selectedItems array already includes item
       setInput("");
       return;
-    } else { //the item is not in the list of selected items
+    } else {
+      //the item is not in the list of selected items
       // creates a new array with the previous items and adds the new item to it
       setSelectedItems((prevSelected) => [...prevSelected, item]);
       setInput("");
@@ -80,7 +81,8 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
           <input
             placeholder="Type here ..."
             type="text"
-            onChange={(e) => { // trigger when the input value changes
+            onChange={(e) => {
+              // trigger when the input value changes
               setInput(e.target.value);
               getSuggestions(e.target.value);
               setTyping(true);
@@ -104,8 +106,8 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
         </div>
       </div>
 
-     {/* when typing is false */}
-     {/* dropdown menu of categories with items */}
+      {/* when typing is false */}
+      {/* dropdown menu of categories with items */}
       {!typing &&
         categories.map((category, index) => (
           <div key={index} className={styles.dropdown}>
@@ -128,8 +130,8 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
             )}
           </div>
         ))}
-        
-{/* list of selected item. */}
+
+      {/* list of selected item. */}
       <div className={styles.selectedItems}>
         <div className={styles.selectedItem}>You have:</div>
         <div className={styles.selectedItem}>
