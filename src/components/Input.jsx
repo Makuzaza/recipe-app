@@ -1,95 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Input.module.css";
 import { useState } from "react";
-import cucumberImage from "../components/images/cucumber.png";
-import carrotImage from "../components/images/carrot.png";
-import tomatoImage from "../components/images/tomato.png";
-import avokadoImage from "../components/images/avokado.png";
-import cabbageImage from "../components/images/cabbage.png";
-import garlicImage from "../components/images/garlic.png";
-import onionImage from "../components/images/onion.png";
-import pumpkinImage from "../components/images/pumpkin.png";
-import radishImage from "../components/images/radish.png";
-import beefImage from "../components/images/cow.png";
-import chickenImage from "../components/images/chicken.png";
-import fishImage from "../components/images/fish.png";
-import porkImage from "../components/images/pork.png";
-import salmonImage from "../components/images/salmon.png";
-import sausageImage from "../components/images/sausages.png";
-import appleImage from "../components/images/apple.png";
-import bananaImage from "../components/images/banana.png";
-import orangeImage from "../components/images/orange.png";
-import grapesImage from "../components/images/grape.png";
-import strawberryImage from "../components/images/strawberry.png";
-import pineappleImage from "../components/images/pineapple.png";
-import lemonImage from "../components/images/lemon.png";
-import milkImage from "../components/images/milk.png";
-import cheeseImage from "../components/images/cheese.png";
-import yogurtImage from "../components/images/yogurt.png";
-import butterImage from "../components/images/butter.png";
-import eggsImage from "../components/images/egg.png";
-import potatoImage from "../components/images/potato.png";
-import riceImage from "../components/images/rice.png";
-import pastaImage from "../components/images/pasta.png";
+import { categories } from '../categoryList';
 
-const categories = [
-  {
-    name: "Vegetables",
-    items: [
-      { name: "cucumber", image: cucumberImage },
-      { name: "carrot", image: carrotImage },
-      { name: "tomato", image: tomatoImage },
-      { name: "avocado", image: avokadoImage },
-      { name: "cabbage", image: cabbageImage },
-      { name: "garlic", image: garlicImage },
-      { name: "onion", image: onionImage },
-      { name: "pumpkin", image: pumpkinImage },
-      { name: "radish", image: radishImage },
-    ],
-  },
-  {
-    name: "Meat/fish",
-    items: [
-      { name: "beef", image: beefImage },
-      { name: "chicken", image: chickenImage },
-      { name: "fish", image: fishImage },
-      { name: "pork", image: porkImage },
-      { name: "salmon", image: salmonImage },
-      { name: "sausage", image: sausageImage },
-    ],
-  },
-  {
-    name: "Fruits",
-    items: [
-      { name: "apple", image: appleImage },
-      { name: "banana", image: bananaImage },
-      { name: "orange", image: orangeImage },
-      { name: "grapes", image: grapesImage },
-      { name: "strawberry", image: strawberryImage },
-      { name: "pineapple", image: pineappleImage },
-      { name: "lemon", image: lemonImage },
-    ],
-  },
-  {
-    name: "Dairy Products",
-    items: [
-      { name: "milk", image: milkImage },
-      { name: "cheese", image: cheeseImage },
-      { name: "yogurt", image: yogurtImage },
-      { name: "butter", image: butterImage },
-      { name: "eggs", image: eggsImage },
-    ],
-  },
-  {
-    name: "Basics",
-    items: [
-      { name: "potato", image: potatoImage },
-      { name: "rice", image: riceImage },
-      { name: "pasta", image: pastaImage },
-    ],
-  },
-];
-
+// managing selected category, selected items, user input, suggestions, and typing state.
 function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -100,9 +14,10 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
   console.log("selectedItem", selectedItems);
   console.log("recipesArr", recipes);
 
+  // asynchronous request to API to fetch ingredients based on the user's input
   const getSuggestions = async (input) => {
     await fetch(
-      `https://api.spoonacular.com/food/ingredients/autocomplete?query=${input}&number=5&apiKey=bea3c85afe2346a6810cb7168710f978`
+      `https://api.spoonacular.com/food/ingredients/autocomplete?query=${input}&number=5&apiKey=973a4b9ded3f489a9ce40c0c468c7838`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -110,6 +25,7 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
       });
   };
 
+ // handle user interactions
   const suggestionHandler = (text) => {
     console.log("text", text);
 
@@ -119,8 +35,9 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
     setSuggestoins([]);
   };
 
+  // select - deselect category
   const handleCategoryClick = (category) => {
-    if (selectedCategory === category) {
+    if (selectedCategory === category) { //clicked category is the one that is currently selected
       setSelectedCategory(null);
     } else {
       setSelectedCategory(category);
@@ -128,7 +45,7 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
   };
 
   const handleItemClick = (item) => {
-    if (selectedItems.includes(item)) {
+    if (selectedItems.includes(item)) { // item is already in the list
       setSelectedItems((prevSelected) =>
         prevSelected.filter((i) => i !== item)
       );
@@ -137,16 +54,20 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
     }
   };
 
+  // remove item from the list
   const handleClose = (item) => {
-    setSelectedItems((prevSelected) =>
+    setSelectedItems((prevSelected) => // create a new array 
       prevSelected.filter((selectedItem) => selectedItem !== item)
     );
   };
+
+  // checks whether the item is already in the list
   function addItemsFromInput(item) {
-    if (selectedItems.includes(item)) {
+    if (selectedItems.includes(item)) { // checks if the selectedItems array already includes item
       setInput("");
       return;
-    } else {
+    } else { //the item is not in the list of selected items
+      // creates a new array with the previous items and adds the new item to it
       setSelectedItems((prevSelected) => [...prevSelected, item]);
       setInput("");
     }
@@ -159,7 +80,7 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
           <input
             placeholder="Type here ..."
             type="text"
-            onChange={(e) => {
+            onChange={(e) => { // trigger when the input value changes
               setInput(e.target.value);
               getSuggestions(e.target.value);
               setTyping(true);
@@ -183,13 +104,15 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
         </div>
       </div>
 
+     {/* when typing is false */}
+     {/* dropdown menu of categories with items */}
       {!typing &&
         categories.map((category, index) => (
           <div key={index} className={styles.dropdown}>
             <button onClick={() => handleCategoryClick(category.name)}>
               {category.name}
             </button>
-            {selectedCategory === category.name && (
+            {selectedCategory === category.name && ( // show items belonging to the selected category
               <div className={styles.dropdownContent}>
                 {category.items.map((item, itemIndex) => (
                   <div
@@ -205,7 +128,8 @@ function Input({ fetchRecipeByIngr, recipes, setRecipes }) {
             )}
           </div>
         ))}
-
+        
+{/* list of selected item. */}
       <div className={styles.selectedItems}>
         <div className={styles.selectedItem}>You have:</div>
         <div className={styles.selectedItem}>
