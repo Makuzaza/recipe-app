@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 
-const Card = ({ image, title, id }) => {
+const Card = ({ image, title, id, fetchRecipeById }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imgContainer}>
@@ -12,7 +12,7 @@ const Card = ({ image, title, id }) => {
         {" "}
         <p className="title"> {title}</p>
         <Link to={`/recipes/${id}`}>
-          <button>View Recipe</button>
+          <button onClick={() => fetchRecipeById(id)}>View Recipe</button>
         </Link>
       </div>
     </div>

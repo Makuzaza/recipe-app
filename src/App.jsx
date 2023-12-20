@@ -10,18 +10,30 @@ import "./index.css";
 function App() {
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [oneRecipe, setOneRecipe] = useState({});
 
   const fetchRecipeByIngr = async (ingredients) => {
     await fetch(
-      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=15&apiKey=973a4b9ded3f489a9ce40c0c468c7838`
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=5&apiKey=973a4b9ded3f489a9ce40c0c468c7838`
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("fromAPI", data);
+        // console.log("AllRecipe", data);
         setRecipes(data);
       });
   };
 
+  const fetchRecipeById = async (id) => {
+    await fetch(
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=973a4b9ded3f489a9ce40c0c468c7838`
+    )
+      .then((response) => response.json())
+      .then((data2) => {
+        // console.log("oneRecipe", data2);
+        setOneRecipe(data2);
+      });
+  };
+  console.log("oneRecipe", oneRecipe);
   function searchHandler(e) {
     setSearch(e.target.value);
   }
@@ -48,10 +60,14 @@ function App() {
               searchHandler={searchHandler}
               search={search}
               recipes={recipes}
+              fetchRecipeById={fetchRecipeById}
             />
           ),
         },
-        { path: "recipes/:id", element: <Recipe /> },
+        {
+          path: "recipes/:id",
+          element: <Recipe oneRecipe={oneRecipe} />,
+        },
       ],
     },
   ]);
